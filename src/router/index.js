@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import routes from './routers'
-import config from '@/config'
 
 /************************************************************************/
 
@@ -24,7 +23,6 @@ router.afterEach(to => {
 export default router
 
 /************************************************************************/
-const { title } = config
 
 /**
  * @description 根据当前跳转的路由设置显示在浏览器标签的title
