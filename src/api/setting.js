@@ -32,7 +32,7 @@ export function setBlogger(obj) {
 
 export function getMetric() {
   return request({
-    url: '/setting/change/getMetric',
+    url: '/setting/info/getMetric',
     method: 'get'
   })
 }
