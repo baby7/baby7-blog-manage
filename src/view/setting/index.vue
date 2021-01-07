@@ -401,7 +401,13 @@ export default {
                 recordUrl: "http://beian.miit.gov.cn",
                 recordNumber: "",
                 createTime: "2019-04-10 20:51:03",
-                updateTime: "2020-11-03 00:00:00"
+                updateTime: "2020-11-03 00:00:00",
+                email: {
+                  host: "smtp.qq.com",
+                  username: "",
+                  password: "",
+                  url: ""
+                }
             },
             localOptions: [
                 {value: 'huadong', label: '华东'},
