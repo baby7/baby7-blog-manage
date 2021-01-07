@@ -16,23 +16,12 @@ router.beforeEach((to, from, next) => {
 });
 
 router.afterEach(to => {
-    setTitle(to);
     window.scrollTo(0, 0)
 });
 
 export default router
 
 /************************************************************************/
-
-/**
- * @description 根据当前跳转的路由设置显示在浏览器标签的title
- * @param {Object} routeItem 路由对象
- */
-export const setTitle = (routeItem) => {
-    const handledRoute = getRouteTitleHandled(routeItem)
-    const pageTitle = showTitle(handledRoute)
-    window.document.title = pageTitle ? `${title}` : title
-}
 
 export const getRouteTitleHandled = (route) => {
     let router = {...route}

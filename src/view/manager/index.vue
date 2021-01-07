@@ -20,17 +20,17 @@
                         <el-input v-model="form.name"></el-input>
                     </el-form-item>
                     <el-form-item label="用户名">
-                        <el-input v-model="form.username"></el-input>
+                        <el-input :disabled="true" v-model="form.username"></el-input>
                     </el-form-item>
                 </el-form>
             </el-tab-pane>
             <el-tab-pane label="修改密码" name="password">
                 <el-form ref="form" :model="form" label-width="80px" style="width: 500px">
                     <el-form-item label="原密码">
-                        <el-input v-model="form.password" show-password></el-input>
+                        <el-input v-model="oldPassword" show-password></el-input>
                     </el-form-item>
                     <el-form-item label="新密码">
-                        <el-input v-model="form.password" show-password></el-input>
+                        <el-input v-model="password" show-password></el-input>
                     </el-form-item>
                     <el-form-item label="确认密码">
                         <el-input v-model="passwordAgain" show-password></el-input>
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import {getInfo} from "@/api/user";
+import {getInfo,setInfo,setPassword} from "@/api/user";
 
 export default {
     name: "manager",
@@ -67,7 +67,10 @@ export default {
             passwordAgain: "",
             postData: {},
             actionPath: "/blog/file/change/save",
-            activeName: "basic"
+            activeName: "basic",
+            oldPassword: "",
+            password: "",
+            tableIndex: 0
         }
     },
     methods: {
@@ -85,10 +88,33 @@ export default {
             }
         },
         onSubmit() {
-
+          if(this.tableIndex == 0){
+            //修改用户信息
+            setInfo(this.form.name, this.form.avatar, this.form.username).then(res => {
+              this.$message.success('修改成功！');
+              // setTimeout(function(){ location.reload(); }, 500);
+            })
+          }
+          else {
+            //修改密码
+            if(this.password !== this.passwordAgain) {
+              this.$message.error('输入两次密码不一致');
+            }
+            else {
+              setPassword(this.oldPassword, this.password, this.form.username).then(res => {
+                if(res.code == 0){
+                  this.$message.success('修改成功！');
+                  setTimeout(function(){ location.reload(); }, 500);
+                }
+                else {
+                  this.$message.error(res.msg);
+                }
+              })
+            }
+          }
         },
-        handleClick() {
-
+        handleClick(item) {
+          this.tableIndex = item.$data.index
         }
     },
     created() {

@@ -21,3 +21,17 @@ export function getInfo() {
     method: 'get'
   })
 }
+
+export function setPassword(oldPassword, password, username) {
+  return request({
+    url: '/user/change/password?oldPassword=' + oldPassword + "&password=" + password + "&username=" + username,
+    method: 'post'
+  })
+}
+
+export function setInfo(name, avatar, username) {
+  return request({
+    url: '/user/change/info?name=' + name + "&avatar=" + avatar + "&username=" + username,
+    method: 'post'
+  })
+}
